@@ -95,6 +95,7 @@ const productSchema = new mongoose.Schema({
     },
     metaKeyword: {
         type: String,
+        
     },
     dimensions: {
         length: Number,
