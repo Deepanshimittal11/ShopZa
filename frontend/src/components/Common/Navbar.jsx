@@ -22,7 +22,7 @@ const Navbar = () => {
             {/* left-logo */}
             <div>
                 <Link to="/" className='text-2xl font-medium'>
-                    Rabbit
+                    ShopZa
                 </Link>
             </div>
             {/* center - navigation links */}
