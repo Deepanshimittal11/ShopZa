@@ -1,4 +1,4 @@
-import {use, useState} from 'react';
+import { useState} from 'react';
 import { Link } from 'react-router-dom';
 import login from "../assets/login.webp";
 
@@ -21,7 +21,7 @@ const Login = () => {
                     </div>
                     <h2 className='text-2xl font-bold text-center mb-6'> Hey there!</h2>
                     <p className='text-center mb-6'>
-                        Enter your username and passwprd to login
+                        Enter your username and password to login
                     </p>
                     <div className='mb-4'>
                         <label className="block text-sm font-semibold mb-2">Email</label>
@@ -45,7 +45,7 @@ const Login = () => {
                     </div>
                     <button
                         type='submit'
-                        className='w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray=800 transition'
+                        className='w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition'
                     >
                         Sign In
                     </button>
