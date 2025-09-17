@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const NewArrival = () => {
+const NewArrivals = () => {
 
     const scrollRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -11,96 +12,21 @@ const NewArrival = () => {
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
 
-    const newArrival = [
-        {
-            _id: "1",
-            name: "stylish jacket",
-            price: 120,
-            images: [
-                {
-                    url: "https://picsum.photos/500?random=1",
-                    altText: "stylish jacket",
-                },
-            ],
-        },
-        {
-            _id: "2",
-            name: "stylish jacket",
-            price: 120,
-            images: [
-                {
-                    url: "https://picsum.photos/500?random=2",
-                    altText: "stylish jacket",
-                },
-            ],
-        },
-        {
-            _id: "3",
-            name: "stylish jacket",
-            price: 120,
-            images: [
-                {
-                    url: "https://picsum.photos/500?random=3",
-                    altText: "stylish jacket",
-                },
-            ],
-        },
-        {
-            _id: "4",
-            name: "stylish jacket",
-            price: 120,
-            images: [
-                {
-                    url: "https://picsum.photos/500?random=4",
-                    altText: "stylish jacket",
-                },
-            ],
-        },
-        {
-            _id: "5",
-            name: "stylish jacket",
-            price: 120,
-            images: [
-                {
-                    url: "https://picsum.photos/500?random=5",
-                    altText: "stylish jacket",
-                },
-            ],
-        },
-        {
-            _id: "6",
-            name: "stylish jacket",
-            price: 120,
-            images: [
-                {
-                    url: "https://picsum.photos/500?random=6",
-                    altText: "stylish jacket",
-                },
-            ],
-        },
-        {
-            _id: "7",
-            name: "stylish jacket",
-            price: 120,
-            images: [
-                {
-                    url: "https://picsum.photos/500?random=7",
-                    altText: "stylish jacket",
-                },
-            ],
-        },
-        {
-            _id: "8",
-            name: "stylish jacket",
-            price: 120,
-            images: [
-                {
-                    url: "https://picsum.photos/500?random=8",
-                    altText: "stylish jacket",
-                },
-            ],
-        },
-    ];
+    const [ newArrivals , setNewArrivals ] = useState([]);
+
+    useEffect(() => {
+        const fetchNewArrivals = async () => {
+            try {
+                const response = await axios.get(
+                    `${import.meta.env.VITE_BACKEND_URL}/api/products/new-arrivals`,
+                );
+                setNewArrivals(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchNewArrivals();
+    }, []);
 
     const handleMouseDown = (e) => {
         setIsDragging(true);
@@ -121,7 +47,7 @@ const NewArrival = () => {
 
     const scroll = (direction) => {
         const scrollAmount = direction === "left" ? -300 : 300;
-        scrollRef.current.scrollBy({left: scrollAmount, behaviour: "smooth"});
+        scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
 
     // update scroll buttons 
@@ -148,7 +74,7 @@ const NewArrival = () => {
             updateScrollButtons();
             return () => container.removeEventListener("scroll", updateScrollButtons);
         }
-    }, []);
+    }, [newArrivals]);
 
   return (
     <section className="py-16 px-4 lg:px-0">
@@ -177,7 +103,7 @@ const NewArrival = () => {
             onMouseUp={handleMouseUpOrLeave}
             onMouseLeave={handleMouseMove}
         >
-            {newArrival.map((product) => (
+            {newArrivals.map((product) => (
                 <div key={product._id}
                     className="min-w-[100%] sm:min-w-[50%] lg:min-w-[30%] relative">
                     <img src={product.images[0]?.url}
@@ -198,4 +124,4 @@ const NewArrival = () => {
   )
 }
 
-export default NewArrival
+export default NewArrivals;

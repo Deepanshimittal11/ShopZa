@@ -130,11 +130,25 @@ const cartSlice = createSlice({
         error: null,
     },
     reducers: {
-      clearCart: (state) => {
-        state.cart = { products: [] };
-        localStorage.removeItem("cart");
-      },
-    },
+  clearCart: (state) => {
+    state.cart = { products: [] };
+    localStorage.removeItem("cart");
+  },
+  updateCartItemQuantityLocal: (state, action) => {
+    const { productId, delta, size, color } = action.payload;
+    const item = state.cart.products.find(
+      (p) => p.productId === productId && p.size === size && p.color === color
+    );
+    if (item) {
+      const newQuantity = item.quantity + delta;
+      if (newQuantity >= 1) {
+        item.quantity = newQuantity;
+        saveCartToStorage(state.cart);
+      }
+    }
+  },
+},
+
     extraReducers: (builder) => {
       builder
         .addCase(fetchCart.pending, (state) => {
