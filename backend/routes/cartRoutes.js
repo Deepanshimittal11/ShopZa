@@ -39,7 +39,7 @@ router.post("/", async (req,res) => {
 
             if(productIndex > -1){
                 //if the product already exists , update the quantity
-                cart.products[productIndex].quantity += quantity;
+                cart.products[productIndex].quantity = quantity;
             } else{
                 //add new product
                 cart.products.push({
