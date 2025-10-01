@@ -9,7 +9,7 @@ import ProductGrid from "../components/Products/ProductGrid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
-import { fetchProductByFilters } from "../redux/slices/productsSlice";
+import { fetchProductsByFilters } from "../redux/slices/productsSlice";
 
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
     useEffect(() => {
         //fetch product for a specific collection
         dispatch(
-            fetchProductByFilters({
+            fetchProductsByFilters({
                 gender: "Women",
                 category: "Bottom Wear",
                 limit: 8,

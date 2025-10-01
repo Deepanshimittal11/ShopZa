@@ -5,7 +5,7 @@ import SortOptions from "../components/Products/SortOptions";
 import ProductGrid from "../components/Products/ProductGrid";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductByFilters } from "../redux/slices/productsSlice";
+import { fetchProductsByFilters } from "../redux/slices/productsSlice";
 
 const CollectionPage = () => {
   const { collection } = useParams([]);
@@ -18,7 +18,7 @@ const CollectionPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     useEffect(() => {
-      dispatch(fetchProductByFilters({ collection, ...queryParams }));
+      dispatch(fetchProductsByFilters({ collection, ...queryParams }));
     }, [dispatch, collection, searchParams ]);
 
     const toggleSidebar = () => {

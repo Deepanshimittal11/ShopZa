@@ -9,7 +9,7 @@ export const fetchUsers = createAsyncThunk("admin/fetchUsers", async () => {
             headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}`},
         }
     );
-    response.data;
+    return response.data;
 });
 
 //add the create user action
@@ -46,7 +46,7 @@ export const updateUser = createAsyncThunk(
                 },
             }
         );
-        response.data;
+        return response.data.user;
     }
 );
 

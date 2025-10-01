@@ -10,6 +10,7 @@ const Navbar = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [navDrawerOpen, setNavDrawerOpen] = useState(false);
     const { cart } = useSelector((state) => state.cart);
+    const { user } = useSelector((state) => state.auth);
 
     const 
         cartItemCount = cart?.products?.reduce((total, product) => total + product.quantity, 0) || 0;
@@ -45,12 +46,16 @@ const Navbar = () => {
                     Bottom wear
                 </Link>
             </div>
+
             {/* right-icons */}
             <div className='flex items-center space-x-4'>
-                <Link to='/admin'
-                    className='block bg-black px-2 rounded text-sm text-white'>
-                    Admin
-                </Link>
+                {user && user.role === "admin" && (
+                    <Link to='/admin'
+                        className='block bg-black px-2 rounded text-sm text-white'>
+                        Admin
+                    </Link>
+                )}
+                
                 <Link to="/profile" className='hover:text-black'>
                     <HiOutlineUser className="h-6 w-6 text-gray-700" />
                 </Link>
@@ -71,6 +76,7 @@ const Navbar = () => {
             </div>
         </nav>
         <CartDrawer drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer}/>
+        
         {/* mobile navigation  */}
         <div className={`fixed top-0 w-3/4 sm:w-1/3 h-full bg-white shadow-lg transform transition-transform duration-300 z-50 ${navDrawerOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <div className='flex justify-end p-4'>
