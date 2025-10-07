@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        "rabbit-red": "#ea2e0e",
+        "shopZa-red": "#ea2e0e",
       }
     },
   },

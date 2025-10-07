@@ -62,7 +62,7 @@ const Navbar = () => {
                 <button onClick={toggleCartDrawer} className='relative hover:text-black'>
                     <HiOutlineShoppingBag className="h-6 w-6 text-gray-700"/>
                     {cartItemCount > 0 && (
-                        <span className='absolute -top-1 bg-rabbit-red text-white text-xs rounded-full px-2 pu-0.5'>
+                        <span className='absolute -top-1 bg-shopZa-red text-white text-xs rounded-full px-2 pu-0.5'>
                             {cartItemCount}
                         </span>
                     )}
