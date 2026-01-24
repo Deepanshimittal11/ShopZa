@@ -1,7 +1,8 @@
 const express = require("express");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const { protect } = require("../middleware/authMiddleware");
+const {protect} = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
 // @route POST /api/users/register
@@ -26,7 +27,7 @@ router.post("/register", async (req,res) => {
         jwt.sign(
             payload, 
             process.env.JWT_SECRET, 
-            { expiresIn: "40h"}, 
+            { expiresIn: "30d"}, 
             (err,token)=>{
             if(err) throw err;
 
@@ -44,8 +45,8 @@ router.post("/register", async (req,res) => {
         );
 
     } catch (error) {
-        console.error(error);
-        return res.status(400).json({ message: error.message || "Server Error" });
+        console.log(error);
+        res.status(500).send("Server Error");
     }
 });
 
@@ -70,7 +71,7 @@ router.post("/login",async (req,res) => {
         jwt.sign(
             payload, 
             process.env.JWT_SECRET, 
-            { expiresIn: "40h"}, 
+            { expiresIn: "30d"}, 
             (err,token)=>{
             if(err) throw err;
 
@@ -97,7 +98,7 @@ router.post("/login",async (req,res) => {
 // @route GET /api/users/profile
 // @desc logged-in user's profile (Protected Route)
 // @access Private
-router.get("/profile",protect, async (req,res) =>{
+router.get("/profile", protect, async (req,res) =>{
     res.json(req.user);
 })
 
