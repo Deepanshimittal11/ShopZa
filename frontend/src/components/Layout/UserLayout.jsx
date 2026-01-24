@@ -1,19 +1,20 @@
-import React from 'react'
-import Header from '../Common/Header'
-import Footer from '../Common/Footer'
-import { Outlet } from 'react-router-dom'
-
+import { Outlet } from "react-router-dom";
+import Footer from "../Common/Footer";
+import Header from "../Common/Header";
+import ChatButton from "../ChatBot/ChatButton";
 const UserLayout = () => {
   return (
     <>
-    {/*header */}
-    <Header></Header>
-    {/*main content */}
+    {/* Header */ }
+    <Header/>
+    {/* Main Content*/}
     <main>
-      <Outlet></Outlet>
+      <Outlet/>
     </main>
-    {/*footer */}
-    <Footer></Footer>
+    {/* Footer */}
+    <Footer/>
+    {/* Chat Button */}
+    <ChatButton/>
     </>
   )
 }
