@@ -4,7 +4,7 @@ import FileUploader from './FileUploader'
 import VoiceToText from './VoiceToText'
 import ChatMessage from './ChatMessage'
 import TypingIndicator from './TypingIndicator'
-import { getOpenRouterResponse } from '../../services/openrouterService'
+import { getOpenRouterResponse } from '../../services/openRouterService'
 import './ChatBot.css'
 
 function ChatBot({ isOpen, onClose }) {
