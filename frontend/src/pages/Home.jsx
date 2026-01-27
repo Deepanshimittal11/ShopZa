@@ -7,7 +7,7 @@ import ProductGrid from "../components/Products/ProductGrid";
 import FeaturesSection from "../components/Products/FeaturesSection";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchProductsByFilters } from "../redux/slices/productSlice";
+import { fetchProductsByFilters } from "../redux/slices/productsSlice";
 import axios from "axios";
 
 // const placeholderProducts=[
