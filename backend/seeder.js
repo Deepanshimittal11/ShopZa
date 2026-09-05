@@ -9,7 +9,9 @@ const products = require("./data/products");
 dotenv.config();
 
 // Connect to mongoDB
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/shopza", {
+    serverSelectionTimeoutMS: 5000,
+});
 
 // Function to seed data
 const seedData = async()=>{

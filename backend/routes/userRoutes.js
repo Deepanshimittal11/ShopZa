@@ -1,14 +1,25 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const {protect} = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
+const requireDatabase = (req, res, next) => {
+    if (mongoose.connection.readyState !== 1) {
+        return res.status(503).json({
+            message: "Database is unavailable. Start MongoDB or verify backend/.env MONGO_URI.",
+        });
+    }
+
+    return next();
+};
+
 // @route POST /api/users/register
 //  @desciption : Register a new user
 //  @access Public
-router.post("/register", async (req,res) => {
+router.post("/register", requireDatabase, async (req,res) => {
     const {name,email,password} = req.body;
 
     try {
@@ -46,14 +57,14 @@ router.post("/register", async (req,res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).send("Server Error");
+        res.status(500).json({ message: error.message || "Server Error" });
     }
 });
 
 // @route POST /api/users/login
 //  @desc : Authenticate user
 //  @access Public
-router.post("/login",async (req,res) => {
+router.post("/login", requireDatabase, async (req,res) => {
     const {email, password} = req.body;
 
     try {
